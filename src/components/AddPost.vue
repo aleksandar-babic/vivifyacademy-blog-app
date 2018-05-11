@@ -15,7 +15,7 @@
       </div>
       <div class="form-group row">
         <div class="offset-4 col-8">
-          <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+          <button name="submit" type="submit" class="btn btn-primary">{{ isEditing ? 'Edit' : 'Submit' }}</button>
           <button name="reset" type="reset" class="btn btn-default">Reset</button>
         </div>
       </div>
@@ -31,14 +31,40 @@ export default {
     return {
       post: {
         title: '',
-        text: ''
-      }
+        text: '',
+      },
+     isEditing: false
+    }
+  },
+
+  created () {
+    if (this.$route.params.id) {
+      this.isEditing = true
+      posts.get(this.$route.params.id)
+        .then((response) => {
+          this.post = response.data
+        })
     }
   },
 
   methods: {
     onSubmit () {
+      if (this.$route.params.id) {
+        this.editPost()
+      } else {
+        this.addPost()
+      }
+    },
+
+    addPost () {
       posts.add(this.post)
+        .then((response) => {
+          this.$router.push({ name: 'posts' })
+        })
+    },
+
+    editPost () {
+      posts.update(this.post)
         .then((response) => {
           this.$router.push({ name: 'posts' })
         })

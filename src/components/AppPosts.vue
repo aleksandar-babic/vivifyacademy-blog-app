@@ -7,7 +7,8 @@
         <span class="badge">Posted at {{ post.createdAt }}</span>
       </div>
       <div>
-        <router-link :to="{ name: 'view', params: { id: post.id } }">View Post</router-link>
+        <router-link :to="{ name: 'view', params: { id: post.id } }" class="btn btn-default">View Post</router-link>
+        <router-link :to="{ name: 'edit', params: { id: post.id } }" class="btn btn-default">Edit Post</router-link>
       </div>
     </div>
   </div>
