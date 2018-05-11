@@ -4,7 +4,7 @@
       <h2>{{ post.title }}</h2>
       <div>{{ post.text.substr(0, 20) }}...</div>
       <div>
-        <span class="badge">Posted at {{ post.createdAt }}</span>
+        <span class="badge">Posted at {{ post.createdAt | formatDate }}</span>
       </div>
       <div class="details">
         <div>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { DateMixin } from '../mixins'
 import { posts } from '../services/Posts'
 
 export default {
@@ -30,6 +31,8 @@ export default {
       posts: []
     }
   },
+
+  mixins: [ DateMixin ],
 
   methods: {
     deletePost(id, index) {

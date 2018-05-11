@@ -4,7 +4,7 @@
       <h2>{{ post.title }}</h2>
       <div>{{ post.text }}...</div>
       <div>
-        <span class="badge">Posted at {{ post.createdAt }}</span>
+        <span class="badge">Posted at {{ post.createdAt | formatDate }}</span>
       </div>
     </div>
     <add-comment @commentAdded="addComment"></add-comment>
@@ -15,6 +15,7 @@
 <script>
 import AddComment from './AddComment.vue'
 import CommentList from './CommentList.vue'
+import { DateMixin } from '../mixins'
 import { posts } from '../services/Posts'
 
 export default {
@@ -23,6 +24,8 @@ export default {
       post: {}
     }
   },
+
+  mixins: [ DateMixin ],
 
   components: {
     AddComment,
