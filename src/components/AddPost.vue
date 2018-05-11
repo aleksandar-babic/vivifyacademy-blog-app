@@ -4,13 +4,13 @@
       <div class="form-group row">
         <label class="col-4"></label>
         <div class="col-8">
-          <input id="title" name="title" placeholder="Title" type="text" class="form-control here" required="required" v-model="post.title">
+          <input id="title" name="title" placeholder="Title" type="text" class="form-control here" required="required" minlength="2" v-model="post.title">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-4"></label>
         <div class="col-8">
-          <input id="text" name="text" placeholder="Your content here" type="text" class="form-control here" v-model="post.text">
+          <textarea id="text" name="text" placeholder="Your content here" class="form-control here" v-model="post.text" minlength="300"></textarea>
         </div>
       </div>
       <div class="form-group row">
