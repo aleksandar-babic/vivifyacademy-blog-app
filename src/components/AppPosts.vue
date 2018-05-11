@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="col-md-10 col-md-offset-1 blog-post" v-for="post in posts" :key="post.id">
+    <div class="col-md-10 col-md-offset-1 blog-post" v-for="(post, index) in posts" :key="post.id">
       <h2>{{ post.title }}</h2>
       <div>{{ post.text.substr(0, 20) }}...</div>
       <div>
@@ -9,6 +9,7 @@
       <div>
         <router-link :to="{ name: 'view', params: { id: post.id } }" class="btn btn-default">View Post</router-link>
         <router-link :to="{ name: 'edit', params: { id: post.id } }" class="btn btn-default">Edit Post</router-link>
+        <button class="btn btn-danger" @click="deletePost(post.id, index)">Delete</button>
       </div>
     </div>
   </div>
@@ -22,6 +23,15 @@ export default {
   data () {
     return {
       posts: []
+    }
+  },
+
+  methods: {
+    deletePost(id, index) {
+      posts.remove(id)
+        .then((response) => {
+          this.posts.splice(index, 1)
+        })
     }
   },
 
