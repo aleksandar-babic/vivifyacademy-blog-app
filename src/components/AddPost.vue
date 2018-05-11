@@ -1,6 +1,6 @@
 <template>
   <div class="container jumbotron">
-    <form @submit.prevent="onSubmit">
+    <form @submit.prevent="onSubmit" @reset="reset">
       <div class="form-group row">
         <label class="col-4"></label>
         <div class="col-8">
@@ -16,6 +16,7 @@
       <div class="form-group row">
         <div class="offset-4 col-8">
           <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+          <button name="reset" type="reset" class="btn btn-default">Reset</button>
         </div>
       </div>
     </form>
@@ -41,6 +42,11 @@ export default {
         .then((response) => {
           this.$router.push({ name: 'posts' })
         })
+    },
+
+    reset () {
+      this.post.title = ''
+      this.post.text = ''
     }
   }
 }
