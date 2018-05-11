@@ -9,6 +9,9 @@
         <li class="nav-item">
           <router-link class="nav-link" :to="{ name: 'posts' }">Posts <span class="sr-only">(current)</span></router-link>
         </li>
+        <li class="nav-item">
+          <router-link class="nav-link" :to="{ name: 'add' }">Add</router-link>
+        </li>
       </ul>
     </div>
   </nav>
