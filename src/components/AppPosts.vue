@@ -6,10 +6,15 @@
       <div>
         <span class="badge">Posted at {{ post.createdAt }}</span>
       </div>
-      <div>
-        <router-link :to="{ name: 'view', params: { id: post.id } }" class="btn btn-default">View Post</router-link>
-        <router-link :to="{ name: 'edit', params: { id: post.id } }" class="btn btn-default">Edit Post</router-link>
-        <button class="btn btn-danger" @click="deletePost(post.id, index)">Delete</button>
+      <div class="details">
+        <div>
+          <router-link :to="{ name: 'view', params: { id: post.id } }" class="btn btn-default">View Post</router-link>
+          <router-link :to="{ name: 'edit', params: { id: post.id } }" class="btn btn-default">Edit Post</router-link>
+          <button class="btn btn-danger" @click="deletePost(post.id, index)">Delete</button>
+        </div>
+        <div>
+          <span class="badge">Number of comments: {{ post.comments.length }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -56,5 +61,11 @@ export default {
 
   .btn {
     margin-top: 5px;
+  }
+
+  .details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 </style>
