@@ -1,6 +1,7 @@
 <template>
   <form @submit.prevent="onSubmit">
     <div class="add-comment-wrapper">
+      <h4>Add Comment</h4>
       <div class="form-group md-6">
           <textarea id="text" name="text" placeholder="Your comment here" class="form-control add-comment-input" v-model="comment.text" required="required"></textarea>
       </div>
@@ -51,7 +52,6 @@ export default {
   width: 70%;
 }
 .add-comment-wrapper {
-  width: 35%;
   padding: 10px;
   margin: 10px;
   border: 0.5px solid grey;
