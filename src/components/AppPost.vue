@@ -1,7 +1,7 @@
 <template>
   <div v-if="post" class="col-md-10 col-md-offset-1 blog-post post-content">
     <h2>{{ post.title }}</h2>
-    <div>{{ post.text  }}...</div>
+    <div v-html="post.text"></div>
     <div>
       <span class="badge">Posted at {{ post.createdAt | formatDate }}</span>
     </div>

@@ -10,7 +10,7 @@
       <div class="form-group row">
         <label class="col-4"></label>
         <div class="col-8">
-          <textarea id="text" name="text" placeholder="Your content here" class="form-control here" v-model="post.text" minlength="300"></textarea>
+          <editor api-key="bagzc7fxx17zvfepjyh5tkns7b8d8p8ce6muu50affxpvjmi" :init="{plugins: 'wordcount'}" v-model="post.text"></editor>
         </div>
       </div>
       <div class="form-group row">
@@ -24,9 +24,13 @@
 </template>
 
 <script>
+import Editor from '@tinymce/tinymce-vue'
 import { posts } from '../services/Posts'
 
 export default {
+  components: {
+    Editor
+  },
   data() {
     return {
       post: {
