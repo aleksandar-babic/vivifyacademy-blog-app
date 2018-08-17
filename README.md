@@ -6,3 +6,5 @@
 ![add-com-2](https://i.imgur.com/c66P8EO.png)
 
 ### 2. U pregledu pojedinacnog posta dodati mogucnost prikaza random posta - prikaze se nasumicno neki post koji je predlazemo korisniku da isto procita - kao suggested posts
+
+![suggested-post-1](https://i.imgur.com/XGWpAp6.png)
