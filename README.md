@@ -8,3 +8,8 @@
 ### 2. U pregledu pojedinacnog posta dodati mogucnost prikaza random posta - prikaze se nasumicno neki post koji je predlazemo korisniku da isto procita - kao suggested posts
 
 ![suggested-post-1](https://i.imgur.com/ajDja9W.png)
+
+### 3. U formi za dodavanje posta implementirati WYSIWYG text editor (npr. Tinymce koji je prikazan na slici)
+
+![txt-editor-1](https://i.imgur.com/vt2O8tc.png)
+![txt-editor-2](https://premium.wpmudev.org/blog/wp-content/uploads/2014/06/more-buttons.gif)
