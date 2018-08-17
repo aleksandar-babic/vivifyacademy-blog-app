@@ -2,7 +2,7 @@
   <div class="container">
     <div class="col-md-10 col-md-offset-1 blog-post">
       <h2>{{ post.title }}</h2>
-      <div>{{ post.text }}...</div>
+      <div class="post-content">{{ post.text }}...</div>
       <div>
         <span class="badge">Posted at {{ post.createdAt | formatDate }}</span>
       </div>
@@ -19,13 +19,13 @@ import { DateMixin } from '../mixins'
 import { posts } from '../services/Posts'
 
 export default {
-  data () {
+  data() {
     return {
       post: {}
     }
   },
 
-  mixins: [ DateMixin ],
+  mixins: [DateMixin],
 
   components: {
     AddComment,
@@ -33,30 +33,34 @@ export default {
   },
 
   methods: {
-    addComment (comment) {
-      posts.addComment(comment, this.post.id)
-        .then((response) => {
-          posts.get(this.post.id)
-            .then((response) => {
-              this.post = response.data
-            })
+    addComment(comment) {
+      posts.addComment(comment, this.post.id).then(response => {
+        posts.get(this.post.id).then(response => {
+          this.post = response.data
         })
+      })
     }
   },
 
   computed: {
-    comments () {
+    comments() {
       return this.post.comments ? this.post.comments.reverse() : []
     }
   },
 
-  beforeRouteEnter (to, from, next) {
-    posts.get(to.params.id)
-      .then((response) => {
-        next((vm) => {
-          vm.post = response.data
-        })
+  beforeRouteEnter(to, from, next) {
+    posts.get(to.params.id).then(response => {
+      next(vm => {
+        vm.post = response.data
       })
+    })
   }
 }
 </script>
+
+<style>
+.post-content {
+  overflow: hidden;
+  width: 99%;
+}
+</style>

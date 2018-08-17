@@ -1,31 +1,31 @@
 import axios from 'axios'
 
 export default class Posts {
-  constructor () {
+  constructor() {
     axios.defaults.baseURL = 'http://localhost:3000/api/'
   }
 
-  getAll () {
+  getAll() {
     return axios.get('posts?filter={"include":["comments"]}')
   }
 
-  get (id) {
+  get(id) {
     return axios.get(`posts/${id}?filter={"include":["comments"]}`)
   }
 
-  add (post) {
+  add(post) {
     return axios.post('posts', post)
   }
 
-  update (post) {
+  update(post) {
     return axios.put(`posts/${post.id}`, post)
   }
 
-  remove (id) {
+  remove(id) {
     return axios.delete(`posts/${id}`)
   }
 
-  addComment (comment, postId) {
+  addComment(comment, postId) {
     return axios.post(`posts/${postId}/comments`, comment)
   }
 }

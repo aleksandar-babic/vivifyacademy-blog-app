@@ -27,28 +27,27 @@
 import { posts } from '../services/Posts'
 
 export default {
-  data () {
+  data() {
     return {
       post: {
         title: '',
-        text: '',
+        text: ''
       },
-     isEditing: false
+      isEditing: false
     }
   },
 
-  created () {
+  created() {
     if (this.$route.params.id) {
       this.isEditing = true
-      posts.get(this.$route.params.id)
-        .then((response) => {
-          this.post = response.data
-        })
+      posts.get(this.$route.params.id).then(response => {
+        this.post = response.data
+      })
     }
   },
 
   methods: {
-    onSubmit () {
+    onSubmit() {
       if (this.$route.params.id) {
         this.editPost()
       } else {
@@ -56,21 +55,19 @@ export default {
       }
     },
 
-    addPost () {
-      posts.add(this.post)
-        .then((response) => {
-          this.$router.push({ name: 'posts' })
-        })
+    addPost() {
+      posts.add(this.post).then(response => {
+        this.$router.push({ name: 'posts' })
+      })
     },
 
-    editPost () {
-      posts.update(this.post)
-        .then((response) => {
-          this.$router.push({ name: 'posts' })
-        })
+    editPost() {
+      posts.update(this.post).then(response => {
+        this.$router.push({ name: 'posts' })
+      })
     },
 
-    reset () {
+    reset() {
       this.post.title = ''
       this.post.text = ''
     }

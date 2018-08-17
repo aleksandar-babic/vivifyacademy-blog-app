@@ -25,50 +25,47 @@ import { DateMixin } from '../mixins'
 import { posts } from '../services/Posts'
 
 export default {
-
-  data () {
+  data() {
     return {
       posts: []
     }
   },
 
-  mixins: [ DateMixin ],
+  mixins: [DateMixin],
 
   methods: {
     deletePost(id, index) {
-      posts.remove(id)
-        .then((response) => {
-          this.posts.splice(index, 1)
-        })
+      posts.remove(id).then(response => {
+        this.posts.splice(index, 1)
+      })
     }
   },
 
-  beforeRouteEnter (to, from, next) {
-    posts.getAll()
-      .then((response) => {
-        next((vm) => {
-          vm.posts = response.data
-        })
+  beforeRouteEnter(to, from, next) {
+    posts.getAll().then(response => {
+      next(vm => {
+        vm.posts = response.data
       })
+    })
   }
 }
 </script>
 
 <style>
-  .blog-post {
-    padding: 10px;
-    margin: 10px;
-    border: 0.5px solid grey;
-    border-radius: 0.5rem;
-  }
+.blog-post {
+  padding: 10px;
+  margin: 10px;
+  border: 0.5px solid grey;
+  border-radius: 0.5rem;
+}
 
-  .btn {
-    margin-top: 5px;
-  }
+.btn {
+  margin-top: 5px;
+}
 
-  .details {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 </style>

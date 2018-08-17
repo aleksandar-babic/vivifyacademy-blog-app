@@ -14,6 +14,6 @@ export default {
     comments: Array
   },
 
-  mixins: [ DateMixin ]
+  mixins: [DateMixin]
 }
 </script>
