@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div v-if="post" class="container">
     <div class="col-md-10 col-md-offset-1 blog-post">
       <h2>{{ post.title }}</h2>
       <div class="post-content">{{ post.text }}...</div>
@@ -7,7 +7,14 @@
         <span class="badge">Posted at {{ post.createdAt | formatDate }}</span>
       </div>
     </div>
-    <add-comment @commentAdded="addComment"></add-comment>
+    <div class="row">
+      <div class="col-md-5">
+        <add-comment @commentAdded="addComment" />
+      </div>
+      <div class="col-md-6">
+        <suggested-post :post="suggestedPost"/>
+      </div>
+    </div>
     <comment-list :comments="comments"></comment-list>
   </div>
 </template>
@@ -15,13 +22,26 @@
 <script>
 import AddComment from './AddComment.vue'
 import CommentList from './CommentList.vue'
+import SuggestedPost from './SuggestedPost'
 import { DateMixin } from '../mixins'
 import { posts } from '../services/Posts'
 
 export default {
   data() {
     return {
-      post: {}
+      posts: [],
+      post: {
+        title: '',
+        text: '',
+        createdAt: '',
+        comments: []
+      },
+      suggestedPost: {
+        title: '',
+        text: '',
+        createdAt: '',
+        comments: []
+      }
     }
   },
 
@@ -29,7 +49,8 @@ export default {
 
   components: {
     AddComment,
-    CommentList
+    CommentList,
+    SuggestedPost
   },
 
   methods: {
@@ -39,20 +60,31 @@ export default {
           this.post = response.data
         })
       })
+    },
+    setPosts(response, context, currId) {
+      context.post = response.data.find(p => p.id === currId)
+      context.posts = response.data
+
+      let randomIndex = Math.floor(Math.random() * this.posts.length)
+      this.suggestedPost = this.posts[randomIndex]
     }
   },
-
   computed: {
     comments() {
       return this.post.comments ? this.post.comments.reverse() : []
     }
   },
-
   beforeRouteEnter(to, from, next) {
-    posts.get(to.params.id).then(response => {
+    posts.getAll().then(response => {
       next(vm => {
-        vm.post = response.data
+        vm.setPosts(response, vm, to.params.id)
       })
+    })
+  },
+  beforeRouteUpdate(to, from, next) {
+    posts.getAll().then(response => {
+      this.setPosts(response, this, to.params.id)
+      next()
     })
   }
 }

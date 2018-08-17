@@ -1,18 +1,18 @@
 <template>
-  <div class="col-md-10 col-md-offset-1 blog-post">
+  <div v-if="post" class="col-md-10 col-md-offset-1 blog-post post-content">
     <h2>{{ post.title }}</h2>
-    <div>{{ post.text.substr(0, 20) }}...</div>
+    <div>{{ post.text  }}...</div>
     <div>
       <span class="badge">Posted at {{ post.createdAt | formatDate }}</span>
     </div>
     <div class="details">
       <div>
           <router-link :to="{ name: 'view', params: { id: post.id } }" class="btn btn-default">View Post</router-link>
-          <router-link :to="{ name: 'edit', params: { id: post.id } }" class="btn btn-default">Edit Post</router-link>
-          <button class="btn btn-danger" @click="onDeletePost(post.id)">Delete</button>
+          <router-link v-if="!isSuggested" :to="{ name: 'edit', params: { id: post.id } }" class="btn btn-default">Edit Post</router-link>
+          <button v-if="!isSuggested" class="btn btn-danger" @click="onDeletePost(post.id)">Delete</button>
       </div>
       <div>
-          <span class="badge">Number of comments: {{ post.comments.length }}</span>
+          <span class="badge">Number of comments: {{ this.post.comments.length }}</span>
       </div>
     </div>
   </div>
@@ -21,7 +21,7 @@
 <script>
 import { DateMixin } from '../mixins'
 export default {
-  props: ['post', 'index'],
+  props: ['post', 'index', 'isSuggested'],
   mixins: [DateMixin],
   methods: {
     onDeletePost(postId) {
